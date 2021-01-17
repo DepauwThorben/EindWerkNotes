@@ -1,0 +1,92 @@
+#title { 
+    text-align: center;
+}
+div {
+    margin:10px;
+    background-color:rgb(163, 40, 147);
+    align-items:center;
+}
+button {
+    margin: 5px;
+}
+
+#userTable
+{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.addUserBox
+{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+
+.split {
+    height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+ 
+}
+
+.left {
+    left: 0;
+   margin-left: -5px;
+   
+  }
+  
+  
+  .right {
+    right: 0;
+  
+  }
+#tabelNotes{
+    margin-top: 50px;
+    margin-left: 500px;
+    min-width: 400px;
+    margin: 10px;
+    align-content:center;
+    text-align: center;
+    align-self: center;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  
+  }
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #af634c;
+    color: white;
+  }
+
+  
+#addName {width: 200px;}
+
+#addUser {
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    width: 200px;
+ 
+    min-height: 50px;
+    align-self: center;
+    
+}
+
+#noteInput {
+    
+    margin:10px;
+    width:50%;
+    min-width: 300px;
+}
