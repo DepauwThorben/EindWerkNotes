@@ -2,7 +2,7 @@
     text-align: center;
 }
 div {
-    margin:10px;
+    
     background-color:rgb(163, 40, 147);
     align-items:center;
 }
@@ -38,7 +38,7 @@ button {
 
 .left {
     left: 0;
-   margin-left: -5px;
+  
    
   }
   

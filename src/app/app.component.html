@@ -90,20 +90,65 @@
                     <mat-option value="All">All</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <button mat-raised-button *ngIf="showNotes" (click)="AddNoteComponent()">add a Note for {{user}} </button>
-
+               
                
   
           </div>
           <mat-hint>&nbsp;&nbsp;&nbsp; {{addMessage}}</mat-hint>
-          <div> <button mat-raised-button  (click)="SearchNote()">Filter in notes for {{user}} </button>  <button mat-raised-button  (click)="NoteListRefresh(user)">Show all notes</button> </div> 
+          <div> <button mat-raised-button  (click)="SearchNote()">Filter  </button>  <button mat-raised-button  (click)="NoteListRefresh(user)">Show all notes</button>  <button mat-raised-button *ngIf="showNotes" (click)="AddNoteStart()">add a Note  </button>
+             User: {{user}}</div> 
+
+             <div>
+              
+    
+              <mat-form-field id="NoteInput"  *ngIf="isNoteEdit" appearance="fill">
+                  <mat-label>{{content}}</mat-label>
+                  <input matInput min="1" max="50" type="string" [(ngModel)]="editNote" #ctrl="ngModel" required
+                      placeholder="max 150 chars">
+                  <mat-hint> {{editMessage}}</mat-hint>
+              </mat-form-field>
+    
+              <mat-form-field *ngIf="isNoteEdit">
+                 
+                  <mat-select  [(ngModel)]="editCategorie">
+                    <mat-option value="Private">Private</mat-option>
+                    <mat-option value="Urgent">Urgent</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                   
+                  </mat-select>
+                </mat-form-field>
+                <button mat-raised-button *ngIf="isNoteEdit" (click)="EditNote()">Done</button>
+                <button mat-raised-button *ngIf="isNoteEdit" (click)="ResetNotes()">Cancel</button>
+              </div>
+
+              <div>
+         
+                <mat-form-field id="NoteInput" *ngIf="isNoteAdded" appearance="fill">
+                    <mat-label>input note please</mat-label>
+                    <input matInput min="1" max="50" type="string" [(ngModel)]="addNote" #ctrl="ngModel" required
+                        placeholder="max 150 chars">
+                  
+                </mat-form-field>
+      
+                <mat-form-field *ngIf="isNoteAdded">
+                   
+                    <mat-select  [(ngModel)]="addCategorie">
+                      <mat-option value="Private">Private</mat-option>
+                      <mat-option value="Urgent">Urgent</mat-option>
+                      <mat-option value="Other">Other</mat-option>
+                     
+                    </mat-select>
+                  </mat-form-field>
+                  <button mat-raised-button *ngIf="isNoteAdded" (click)="AddNoteComponent()">Done</button>
+                <button mat-raised-button *ngIf="isNoteAdded" (click)="ResetNotes()">Cancel</button>
+            </div>
           <table id="tabelNotes" mat-table [dataSource]="noteList">
             
              
   
 
               <ng-container matColumnDef="Content">
-                  <th mat-header-cell *matHeaderCellDef> Notes for {{user}} </th>
+                  <th mat-header-cell *matHeaderCellDef> Notes </th>
                   <td mat-cell *matCellDef="let element"> {{element.content}} </td>
                
                
@@ -151,26 +196,7 @@
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
 
-      <div>
-          <button mat-raised-button *ngIf="isNoteEdit" (click)="EditNote()">edit a Note for user {{insertNameNote}} </button>
-
-          <mat-form-field id="NoteInput"  *ngIf="isNoteEdit" appearance="fill">
-              <mat-label>{{content}}</mat-label>
-              <input matInput min="1" max="50" type="string" [(ngModel)]="editNote" #ctrl="ngModel" required
-                  placeholder="max 150 chars">
-              <mat-hint> {{editMessage}}</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field *ngIf="isNoteEdit">
-             
-              <mat-select  [(ngModel)]="categorie">
-                <mat-option value="Private">Private</mat-option>
-                <mat-option value="Urgent">Urgent</mat-option>
-                <mat-option value="Other">Other</mat-option>
-               
-              </mat-select>
-            </mat-form-field>
-      </div>
+      
   </div>
 
 </div>

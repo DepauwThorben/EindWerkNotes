@@ -43,7 +43,7 @@ export class AppComponent {
   editNote: string;
   searchNote: string;
   categorie: string;
-  isNoteAdded: boolean = false;
+  notAdded: boolean = false;
   showNotes: boolean = false;
   user: string;
   addNameMessage: string;
@@ -61,9 +61,9 @@ export class AppComponent {
   searchMessage:string;
   searchContent:string;
   selectedCategorie:string;
-  
-  
-
+  isNoteAdded: boolean = false;
+  addCategorie:string;
+editCategorie:string;
  
   constructor(apiService: APIService) {
     this.service = apiService;
@@ -86,7 +86,7 @@ export class AppComponent {
 
   PopUpAdduser = () => {
     this.addUser=true;
-    this.isNoteAdded=false;
+    this.notAdded=false;
     this.showNotes=false;
   }
 
@@ -108,7 +108,7 @@ export class AppComponent {
       }
 
       this.showNotes = false;
-      this.isNoteAdded = false;
+      this.notAdded = false;
       this.isUserDeleted=false;
       this.insertNameNote = "";
       this.UserlistRefresh();
@@ -117,15 +117,39 @@ export class AppComponent {
     });
   }
 
+  AddNoteStart = () =>
+  {
+    this.notAdded = true;
+      this.addNote = "";
+      this.addNameMessage = "";
+      this.showNotes = true;
+      this.isUserDeleted=false;
+      this.addUser=false;
+      this.isNoteAdded = true;
+  }
+
+  ResetNotes()
+  {
+    
+      this.showNotes = true;
+      this.isNoteAdded = false;
+      this.addNameMessage = "";
+      this.notAdded = false;
+      this.isUserDeleted=false;
+      this.insertNameNote = "";
+      this.addUser=false;
+      
+      this.isNoteEdit = false;
+  }
   AddNoteComponent = () => {
 
-    if (this.content === undefined) {
+    if (this.addNote === undefined) {
       this.addMessage = "Please insert a note ";
       return;
     }
 
 
-   if(this.categorie === "All")
+   if(this.addCategorie === "All" || this.addCategorie === "NoCategorie")
    {
     this.addMessage = "Please select a valid categorie. ";
     
@@ -135,7 +159,7 @@ export class AppComponent {
     
 
     console.log("Note Added");
-    this.service.AddNote(this.user, this.content,this.categorie).subscribe((response) => {
+    this.service.AddNote(this.user, this.addNote,this.addCategorie).subscribe((response) => {
       console.log(response);
       this.addMessage = JSON.stringify(response);
       this.message = JSON.parse(this.addMessage);
@@ -147,7 +171,7 @@ export class AppComponent {
 
 
       
-      this.isNoteAdded = true;
+      this.notAdded = true;
       this.addNote = "";
       this.addNameMessage = "";
       this.showNotes = true;
@@ -163,7 +187,7 @@ export class AppComponent {
     console.log("addNoteTabel: " + naamaddNote);
     this.categorie = "Private"
     this.addMessage="";
-    this.isNoteAdded = true;
+    this.notAdded = true;
     this.insertNameNote = naamaddNote;
     this.showNotes = true;
     this.isUserDeleted=false;
@@ -188,7 +212,7 @@ export class AppComponent {
       this.user = naamAlleNotes;
       console.log(this.noteList);
      
-      this.isNoteAdded = true;
+      this.notAdded = true;
       this.isUserDeleted=false;
       
       this.addUser=false;
@@ -199,7 +223,9 @@ export class AppComponent {
   }
 
   DeleteUserComponent = (naamVerwijderen: string) => {
-
+    let result = confirm("You sure?");
+    if(result)
+   {
     this.service.DeleteUser(naamVerwijderen).subscribe((response) => {
       this.deleteUserMessage = JSON.stringify(response);
       this.message = JSON.parse(this.deleteUserMessage);
@@ -217,12 +243,13 @@ export class AppComponent {
         this.UserlistRefresh();
       this.showNotes = false;
       this.addNameMessage = "";
-      this.isNoteAdded = false;
+      this.notAdded = false;
       this.addUser=false;
       this.insertNameNote = "";
       this.isUserDeleted=true;
     });
   }
+}
 
 
 
@@ -238,7 +265,7 @@ export class AppComponent {
       this.user = naamAlleNotes;
       console.log(this.noteList);
       this.addNameMessage = "";
-      this.isNoteAdded = false;
+      this.notAdded = false;
       this.isUserDeleted=false;
       this.insertNameNote = "";
       this.addUser=false;
@@ -254,16 +281,16 @@ export class AppComponent {
     this.isNoteEdit = true;
     console.log("editNoteTabel: " + id);
     this.noteId = id;
-    this.content = content;
-    this.categorie = categorie;
+   
     this.addMessage="";
-    this.isNoteAdded = false;
+    this.notAdded = false;
     this.insertNameNote = this.user;
-    this.showNotes = false;
+    this.showNotes = true;
     this.isUserDeleted=false;
     this.addUser=false;
     this.addNameMessage = "";
     this.editNote = content;
+    this.editCategorie = categorie;
 
   }
 
@@ -280,7 +307,7 @@ export class AppComponent {
         console.log(this.content)
         console.log(this.categorie)
         this.addNameMessage = "";
-        this.isNoteAdded = false;
+        this.notAdded = false;
         this.isUserDeleted=false;
         this.insertNameNote = "";
         this.addUser=false;
@@ -302,7 +329,7 @@ export class AppComponent {
     }
 
 
-    this.service.EditNote(this.noteId,this.editContent,this.categorie).subscribe((response) => {
+    this.service.EditNote(this.noteId,this.editContent,this.editCategorie).subscribe((response) => {
       this.deleteUserMessage = JSON.stringify(response);
       this.message = JSON.parse(this.deleteUserMessage);
       console.log("een response: " + this.message.success);
@@ -315,7 +342,7 @@ export class AppComponent {
       this.NoteListRefresh(this.user);
       this.showNotes = true;
       this.addNameMessage = "";
-      this.isNoteAdded = false;
+      this.notAdded = false;
       this.addUser=false;
       this.insertNameNote = "";
       this.isUserDeleted=false;
@@ -324,6 +351,10 @@ export class AppComponent {
   }
    RemoveNote = (id) => {
 
+
+    let result = confirm("You sure?");
+    if(result)
+   {
     this.service.DeleteNote(id).subscribe((response) => {
       this.deleteUserMessage = JSON.stringify(response);
       this.message = JSON.parse(this.deleteUserMessage);
@@ -341,10 +372,11 @@ export class AppComponent {
       this.insertAddedName = "",
       this.showNotes = true;
       this.addNameMessage = "";
-      this.isNoteAdded = false;
+      this.notAdded = false;
       this.addUser=false;
       this.insertNameNote = "";
       this.isUserDeleted=false;
     });
   }
+}
 }
