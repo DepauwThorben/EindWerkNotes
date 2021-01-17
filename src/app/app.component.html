@@ -7,7 +7,7 @@
 
    
   <div class="addUserBox">
-    <button mat-raised-button (click)="AddUserComponent()">Add new user: </button>
+    <button mat-raised-button (click)="AddUserComponent()">Add user: </button>
     <mat-form-field id="addName" appearance="fill">
         <mat-label>Give a name </mat-label>
         <input matInput min="1" max="50" type="string" [(ngModel)]="insertAddedName" #ctrl="ngModel"
@@ -27,18 +27,18 @@
             
 
             <ng-container matColumnDef="ShowAllNotes">
-                <th mat-header-cell width=200px text-align=center *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;Show all notes</th>
+                <th mat-header-cell width=200px text-align=center *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <td mat-cell *matCellDef="let element"> <Button mat-stroked-button
-                        (click)="GetNotesComponent(element.name,element.id)">Show notes of {{element.name}}</Button>
+                        (click)="GetNotesComponent(element.name,element.id)">Show notes</Button>
                 </td>
             </ng-container>
 
 
             <ng-container matColumnDef="ButtonRemoveUser">
-                <th mat-header-cell width=200px text-align=center *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;Delete user</th>
+                <th mat-header-cell width=200px text-align=center *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <td mat-cell *matCellDef="let element"> <Button mat-raised-button
                         (click)="DeleteUserComponent(element.name)">Delete 
-                        {{element.name}}</Button>
+                       </Button>
                 </td>
             </ng-container>
 
@@ -74,32 +74,34 @@
           <div>
               
             
-              <mat-form-field id="NoteInput"   appearance="fill">
-                 
-                  <input matInput max="50" type="string" [(ngModel)]="content" #ctrl="ngModel" required
-                      placeholder="max 150 chars">
-                 
-              </mat-form-field>
               
-              <mat-form-field>
-                  <mat-label>Categorie</mat-label>
-                  <mat-select   [(ngModel)]="categorie">
-                    <mat-option value="Private">Private</mat-option>
-                    <mat-option value="Urgent">Urgent</mat-option>
-                    <mat-option value="Other">Other</mat-option>
-                    <mat-option value="All">All</mat-option>
-                  </mat-select>
-                </mat-form-field>
                
                
   
           </div>
-          <mat-hint>&nbsp;&nbsp;&nbsp; {{addMessage}}</mat-hint>
-          <div> <button mat-raised-button  (click)="SearchNote()">Filter  </button>  <button mat-raised-button  (click)="NoteListRefresh(user)">Show all notes</button>  <button mat-raised-button *ngIf="showNotes" (click)="AddNoteStart()">add a Note  </button>
-             User: {{user}}</div> 
-
+          
+          <div>
+            <mat-form-field id="NoteInput"   appearance="fill">
+                 
+              <input matInput max="50" type="string" [(ngModel)]="content" #ctrl="ngModel" required
+                  placeholder="max 150 chars">
+             
+          </mat-form-field>
+          
+          <mat-form-field>
+              <mat-label>Sort by</mat-label>
+              <mat-select   [(ngModel)]="categorie">
+                <mat-option value="Private">Private</mat-option>
+                <mat-option value="Urgent">Urgent</mat-option>
+                <mat-option value="Other">Other</mat-option>
+                <mat-option value="All">All</mat-option>
+              </mat-select>
+            </mat-form-field>
+             <button mat-raised-button  (click)="SearchNote()">Search </button>  <button mat-raised-button  (click)="NoteListRefresh(user)"> Reset Search</button> 
+            </div> 
+              <div>  <button mat-raised-button *ngIf="showNotes" (click)="AddNoteStart()">Add </button>  User: {{user}} </div>
              <div>
-              
+             
     
               <mat-form-field id="NoteInput"  *ngIf="isNoteEdit" appearance="fill">
                   <mat-label>{{content}}</mat-label>
@@ -117,7 +119,7 @@
                    
                   </mat-select>
                 </mat-form-field>
-                <button mat-raised-button *ngIf="isNoteEdit" (click)="EditNote()">Done</button>
+                <button mat-raised-button *ngIf="isNoteEdit" (click)="EditNote()">Finish Edit</button>
                 <button mat-raised-button *ngIf="isNoteEdit" (click)="ResetNotes()">Cancel</button>
               </div>
 
@@ -142,6 +144,7 @@
                   <button mat-raised-button *ngIf="isNoteAdded" (click)="AddNoteComponent()">Done</button>
                 <button mat-raised-button *ngIf="isNoteAdded" (click)="ResetNotes()">Cancel</button>
             </div>
+            <mat-hint>&nbsp;&nbsp;&nbsp; {{addMessage}}</mat-hint>
           <table id="tabelNotes" mat-table [dataSource]="noteList">
             
              
@@ -155,16 +158,16 @@
           
               </ng-container>
 
-              <ng-container matColumnDef="Categorie">
-                  <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;  Categorie </th>
+              <ng-container  matColumnDef="Categorie">
+                  <th  mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;  Categorie </th>
                 
-                  <td mat-cell *matCellDef="let element"> {{element.categorie}}</td>
+                  <td class="categorieContainer" mat-cell *matCellDef="let element"> {{element.categorie}}</td>
                
           
               </ng-container>
 
               <ng-container matColumnDef="EditNote">
-                  <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;Edit </th>
+                  <th mat-header-cell *matHeaderCellDef> &nbsp;&nbsp;&nbsp;&nbsp;</th>
                 
                   <td mat-cell *matCellDef="let element"> <Button mat-raised-button
                       (click)="EditNoteComponent(element.content,element.categorie,element.id)">Edit</Button> </td>
@@ -172,7 +175,7 @@
               </ng-container>
 
               <ng-container matColumnDef="DeleteNote">
-                  <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp; Remove</th>
+                  <th mat-header-cell *matHeaderCellDef>&nbsp;&nbsp;&nbsp;&nbsp; </th>
                 
                   <td mat-cell *matCellDef="let element"> <Button 
                       (click)="RemoveNote(element.id)">Remove</Button> </td>

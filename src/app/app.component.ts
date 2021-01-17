@@ -119,6 +119,7 @@ editCategorie:string;
 
   AddNoteStart = () =>
   {
+    this.isNoteEdit = false;
     this.notAdded = true;
       this.addNote = "";
       this.addNameMessage = "";
@@ -149,7 +150,7 @@ editCategorie:string;
     }
 
 
-   if(this.addCategorie === "All" || this.addCategorie === "NoCategorie")
+   if(this.addCategorie === "All" || this.addCategorie === "NoCategorie" || !this.addCategorie)
    {
     this.addMessage = "Please select a valid categorie. ";
     
@@ -218,6 +219,7 @@ editCategorie:string;
       this.addUser=false;
     
       this.isNoteEdit = false;
+      
       
     });
   }
@@ -291,7 +293,7 @@ editCategorie:string;
     this.addNameMessage = "";
     this.editNote = content;
     this.editCategorie = categorie;
-
+   this.isNoteAdded = false;
   }
 
   SearchListRefresh = (userId,content:string,categorie:string) => this.service.SearchNote(userId,content,categorie).subscribe((data:Array<Notes>) => {

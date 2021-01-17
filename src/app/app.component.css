@@ -47,13 +47,20 @@ button {
     right: 0;
   
   }
+
+  .categorieContainer
+  {
+      padding-left: 5px;
+      width:75px;
+  }
 #tabelNotes{
     margin-top: 50px;
     margin-left: 500px;
     min-width: 400px;
     margin: 10px;
+    
     align-content:center;
-    text-align: center;
+    text-align: left;
     align-self: center;
 }
 
@@ -66,7 +73,7 @@ td, th {
 th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: center;
+    text-align: left;
     background-color: #af634c;
     color: white;
   }
