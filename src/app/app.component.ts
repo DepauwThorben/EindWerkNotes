@@ -305,7 +305,12 @@ editCategorie:string;
   {
     
     this.addMessage = "";
+    if(!this.categorie || this.categorie == "Sort By" || this.categorie == "NoCategorie")
+    {
+      this.categorie = "All";
+    }
         this.SearchListRefresh(this.userId,this.content,this.categorie);
+       
         console.log(this.content)
         console.log(this.categorie)
         this.addNameMessage = "";

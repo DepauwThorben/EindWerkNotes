@@ -10,7 +10,7 @@
     <button mat-raised-button (click)="AddUserComponent()">Add user: </button>
     <mat-form-field id="addName" appearance="fill">
         <mat-label>Give a name </mat-label>
-        <input matInput min="1" max="50" type="string" [(ngModel)]="insertAddedName" #ctrl="ngModel"
+        <input matInput  maxlength="50" type="string" [(ngModel)]="insertAddedName" #ctrl="ngModel"
             required placeholder="max 50 chars">
         <mat-hint>{{addNameMessage}}</mat-hint>
     </mat-form-field>
@@ -83,8 +83,8 @@
           <div>
             <mat-form-field id="NoteInput"   appearance="fill">
                  
-              <input matInput max="50" type="string" [(ngModel)]="content" #ctrl="ngModel" required
-                  placeholder="max 150 chars">
+              <input matInput  type="string" [(ngModel)]="content" #ctrl="ngModel" required
+                  placeholder="Search note">
              
           </mat-form-field>
           
@@ -99,13 +99,13 @@
             </mat-form-field>
              <button mat-raised-button  (click)="SearchNote()">Search </button>  <button mat-raised-button  (click)="NoteListRefresh(user)"> Reset Search</button> 
             </div> 
-              <div>  <button mat-raised-button *ngIf="showNotes" (click)="AddNoteStart()">Add </button>  User: {{user}} </div>
+              <div>  <button mat-raised-button *ngIf="showNotes" (click)="AddNoteStart()">New note </button>  User: {{user}} </div>
              <div>
              
     
               <mat-form-field id="NoteInput"  *ngIf="isNoteEdit" appearance="fill">
                   <mat-label>{{content}}</mat-label>
-                  <input matInput min="1" max="50" type="string" [(ngModel)]="editNote" #ctrl="ngModel" required
+                  <input matInput maxlength="150" type="string" [(ngModel)]="editNote" #ctrl="ngModel" required
                       placeholder="max 150 chars">
                   <mat-hint> {{editMessage}}</mat-hint>
               </mat-form-field>
@@ -119,7 +119,7 @@
                    
                   </mat-select>
                 </mat-form-field>
-                <button mat-raised-button *ngIf="isNoteEdit" (click)="EditNote()">Finish Edit</button>
+                <button mat-raised-button *ngIf="isNoteEdit" (click)="EditNote()">Finish edit</button>
                 <button mat-raised-button *ngIf="isNoteEdit" (click)="ResetNotes()">Cancel</button>
               </div>
 
@@ -127,7 +127,7 @@
          
                 <mat-form-field id="NoteInput" *ngIf="isNoteAdded" appearance="fill">
                     <mat-label>input note please</mat-label>
-                    <input matInput min="1" max="50" type="string" [(ngModel)]="addNote" #ctrl="ngModel" required
+                    <input matInput min="1" maxlength="150" type="string" [(ngModel)]="addNote" #ctrl="ngModel" required
                         placeholder="max 150 chars">
                   
                 </mat-form-field>
