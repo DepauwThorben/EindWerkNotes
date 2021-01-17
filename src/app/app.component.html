@@ -10,7 +10,7 @@
     <button mat-raised-button (click)="AddUserComponent()">Add user: </button>
     <mat-form-field id="addName" appearance="fill">
         <mat-label>Give a name </mat-label>
-        <input matInput  maxlength="50" type="string" [(ngModel)]="insertAddedName" #ctrl="ngModel"
+        <input matInput  maxlength="50" (keyup.enter)="AddUserComponent()"type="string" [(ngModel)]="insertAddedName" #ctrl="ngModel"
             required placeholder="max 50 chars">
         <mat-hint>{{addNameMessage}}</mat-hint>
     </mat-form-field>
@@ -83,7 +83,7 @@
           <div>
             <mat-form-field id="NoteInput"   appearance="fill">
                  
-              <input matInput  type="string" [(ngModel)]="content" #ctrl="ngModel" required
+              <input matInput (keyup.enter)="SearchNote()" type="string" [(ngModel)]="content" #ctrl="ngModel" required
                   placeholder="Search note">
              
           </mat-form-field>
@@ -105,7 +105,7 @@
     
               <mat-form-field id="NoteInput"  *ngIf="isNoteEdit" appearance="fill">
                   <mat-label>{{content}}</mat-label>
-                  <input matInput maxlength="150" type="string" [(ngModel)]="editNote" #ctrl="ngModel" required
+                  <input matInput maxlength="150" type="string" (keyup.enter)="EditNote()" [(ngModel)]="editNote" #ctrl="ngModel" required
                       placeholder="max 150 chars">
                   <mat-hint> {{editMessage}}</mat-hint>
               </mat-form-field>
@@ -127,8 +127,8 @@
          
                 <mat-form-field id="NoteInput" *ngIf="isNoteAdded" appearance="fill">
                     <mat-label>input note please</mat-label>
-                    <input matInput min="1" maxlength="150" type="string" [(ngModel)]="addNote" #ctrl="ngModel" required
-                        placeholder="max 150 chars">
+                    <input matInput min="1" maxlength="150" (keyup.enter)="AddNoteComponent()" type="string" [(ngModel)]="addNote" #ctrl="ngModel" required
+                        placeholder="max 150 chars" >
                   
                 </mat-form-field>
       
@@ -138,7 +138,7 @@
                       <mat-option value="Private">Private</mat-option>
                       <mat-option value="Urgent">Urgent</mat-option>
                       <mat-option value="Other">Other</mat-option>
-                     
+                      
                     </mat-select>
                   </mat-form-field>
                   <button mat-raised-button *ngIf="isNoteAdded" (click)="AddNoteComponent()">Done</button>

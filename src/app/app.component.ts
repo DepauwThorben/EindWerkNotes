@@ -89,10 +89,11 @@ editCategorie:string;
     this.notAdded=false;
     this.showNotes=false;
   }
+  
 
   AddUserComponent = () => {
     if (this.insertAddedName == undefined) {
-      this.addNameMessage = "u hebt niets ingevuld. ";
+      this.addNameMessage = "No info was added ";
       return;
     }
 
@@ -204,7 +205,7 @@ editCategorie:string;
 
   GetNotesAddComponent = (naamAlleNotes: string) => {
     this.categorie = "NoCategorie";
-    console.log("toon alle Notes van:" + naamAlleNotes);
+    console.log("show all notes of:" + naamAlleNotes);
     this.service.GetNotes(naamAlleNotes).subscribe((data: Array<Notes>) => {
       console.log(data);
       this.noteList = data;
@@ -231,7 +232,7 @@ editCategorie:string;
     this.service.DeleteUser(naamVerwijderen).subscribe((response) => {
       this.deleteUserMessage = JSON.stringify(response);
       this.message = JSON.parse(this.deleteUserMessage);
-      console.log("een response: " + this.message.success);
+      console.log("a response: " + this.message.success);
       console.log(response);
 
 
@@ -259,7 +260,7 @@ editCategorie:string;
 
   GetNotesComponent = (naamAlleNotes: string,userId) => {
     this.categorie = "NoCategorie";
-    console.log("toon alle Notes van:" + naamAlleNotes);
+    console.log("show all notes off:" + naamAlleNotes);
     this.service.GetNotes(naamAlleNotes).subscribe((data: Array<Notes>) => {
       console.log(data);
       this.noteList = data;
@@ -339,7 +340,7 @@ editCategorie:string;
     this.service.EditNote(this.noteId,this.editContent,this.editCategorie).subscribe((response) => {
       this.deleteUserMessage = JSON.stringify(response);
       this.message = JSON.parse(this.deleteUserMessage);
-      console.log("een response: " + this.message.success);
+      console.log("a response: " + this.message.success);
       console.log(response);
 
 
@@ -365,7 +366,7 @@ editCategorie:string;
     this.service.DeleteNote(id).subscribe((response) => {
       this.deleteUserMessage = JSON.stringify(response);
       this.message = JSON.parse(this.deleteUserMessage);
-      console.log("een response: " + this.message.success);
+      console.log("a response: " + this.message.success);
       console.log(response);
 
 
